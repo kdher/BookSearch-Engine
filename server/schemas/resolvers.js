@@ -1,5 +1,5 @@
-const { User, Book } = require('../models');
-const { AuthenticationError } = require('apollo-server-express');
+const { User } = require('../models');
+const { AuthenticationError } = require('apollo-server-errors');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -50,7 +50,7 @@ const resolvers = {
   
     removeBook: async (parent, { bookId, context }) => {
       if(context.user) { 
-      return Profile.findOneAndUpdate(
+      return userbook.findOneAndUpdate(
         { _id: contex.user._id },
         { $pull: { saveBooks: {bookId: args.bookId } } },
         { new: true }
